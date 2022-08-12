@@ -1,4 +1,5 @@
 import { Bank, CreditCard, CurrencyBtc, Money } from 'phosphor-react'
+import { useShoppingCart } from '../../../../hooks/useShoppingCart'
 import {
   HeaderForms,
   PaymentField,
@@ -7,9 +8,17 @@ import {
 } from './styles'
 
 export function Payment() {
-  function handleButtonSelected() {
-    console.log('button selected')
+  const { handleChangePaymentMethod } = useShoppingCart()
+  function handleChangePaymentCredit() {
+    handleChangePaymentMethod('Cartão de crédito')
   }
+  function handleChangePaymentDebit() {
+    handleChangePaymentMethod('Cartão de débito')
+  }
+  function handleChangePaymentMoney() {
+    handleChangePaymentMethod('Dinheiro')
+  }
+
   return (
     <PaymentField>
       <HeaderForms>
@@ -23,22 +32,26 @@ export function Payment() {
       </HeaderForms>
       <TypePaymentContainer>
         <TypePayment
-          onClick={handleButtonSelected}
-          value="credito"
+          onClick={handleChangePaymentCredit}
+          value="CARTÃO DE CRÉDITO"
           type="button"
         >
           <CreditCard size={22} color="#8047F8" />
           <h3>CARTÃO DE CRÉDITO</h3>
         </TypePayment>
         <TypePayment
-          onClick={handleButtonSelected}
-          value="debito"
+          onClick={handleChangePaymentDebit}
+          value="CARTÃO DE DÉBITO"
           type="button"
         >
           <Bank size={22} color="#8047F8" />
           <h3>CARTÃO DE DÉBITO</h3>
         </TypePayment>
-        <TypePayment onClick={handleButtonSelected} value="money" type="button">
+        <TypePayment
+          onClick={handleChangePaymentMoney}
+          value="DINHEIRO"
+          type="button"
+        >
           <Money size={22} color="#8047F8" />
           <h3>DINHEIRO</h3>
         </TypePayment>

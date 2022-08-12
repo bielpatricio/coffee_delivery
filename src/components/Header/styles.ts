@@ -11,7 +11,7 @@ export const HeaderContainer = styled.header`
   min-width: 60rem;
   padding: 2rem;
 
-  div {
+  > div {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -40,4 +40,27 @@ export const LocationContainer = styled.div`
   color: ${(props) => props.theme.purple};
   border-radius: 8px;
   border: none;
+`
+
+export const QuantityCart = styled.div`
+  border-radius: 50%;
+  border: none;
+  background-color: ${(props) => props.theme['yellow-dark']};
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -0.75rem;
+  margin-top: -0.75rem;
+  span {
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: 12px;
+    color: ${(props) => props.theme.white};
+  }
+`
+
+export const CartContainer = styled.div`
+  display: flex;
 `

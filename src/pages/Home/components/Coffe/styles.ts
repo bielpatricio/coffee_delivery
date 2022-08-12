@@ -85,7 +85,7 @@ export const Footer = styled.footer`
     /* height: 2rem; */
   }
 `
-export const ShoppingCartDiv = styled.a`
+export const ShoppingCartDiv = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;

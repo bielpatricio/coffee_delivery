@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from 'react'
+import { useShoppingCart } from '../../../../../../hooks/useShoppingCart'
 import {
   Button,
   ButtonField,
@@ -10,8 +11,29 @@ import {
   QuantInput,
 } from './styles'
 
-export function ProductInMarket() {
-  const [quantity, setQuantity] = useState(1)
+interface CoffeeProps {
+  id: string
+  name: string
+  amount: number
+  description: string
+  price: number
+  image: string
+  tags: string[]
+}
+
+export function ProductInMarket({
+  id,
+  name,
+  amount,
+  description,
+  price,
+  image,
+  tags,
+}: CoffeeProps) {
+  const [quantity, setQuantity] = useState(amount)
+
+  const imageURL = `/src/assets/Type=${image}.svg`
+  const { addItem, subItem, removeItem } = useShoppingCart()
 
   function handleQuantityChange(e: ChangeEvent<HTMLInputElement>) {
     setQuantity(parseInt(e.target.value))
@@ -19,17 +41,31 @@ export function ProductInMarket() {
 
   function SumQuantityProduct() {
     setQuantity((state) => state + 1)
+    addItem(id)
   }
 
   function SubQuantityProduct() {
-    setQuantity((state) => state - 1)
+    if (quantity > 1) {
+      subItem(id)
+      setQuantity((state) => {
+        return state - 1
+      })
+    } else {
+      console.log('y?????????')
+      removeItem(id)
+      setQuantity(0)
+    }
+  }
+
+  function handleRemoveItem() {
+    removeItem(id)
   }
 
   return (
     <CoffeeContainer>
-      <img src="/src/assets/Type=Americano.svg" alt="Coffee" />
+      <img src={imageURL} alt={image} />
       <MiddleColumn>
-        <h3>Expresso Tradicional</h3>
+        <h3>{name}</h3>
         <ButtonField>
           <div>
             <Button onClick={SumQuantityProduct}>
@@ -38,7 +74,7 @@ export function ProductInMarket() {
             <QuantInput
               placeholder="1"
               id="QuantInput"
-              value={quantity}
+              value={amount}
               onChange={handleQuantityChange}
             />
             <Button onClick={SubQuantityProduct}>
@@ -46,7 +82,7 @@ export function ProductInMarket() {
             </Button>
           </div>
           <div>
-            <Button>
+            <Button onClick={handleRemoveItem}>
               <ButtonIconRemove size={16} color="#8047F8" weight="bold" />
               <h4>REMOVER</h4>
             </Button>
@@ -54,7 +90,7 @@ export function ProductInMarket() {
         </ButtonField>
       </MiddleColumn>
       <div>
-        <span>R$ 9,90</span>
+        <span>R$ ${price}</span>
       </div>
     </CoffeeContainer>
   )

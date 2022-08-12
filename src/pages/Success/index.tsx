@@ -1,4 +1,5 @@
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
+import { useShoppingCart } from '../../hooks/useShoppingCart'
 import {
   IconLocation,
   IconMoney,
@@ -8,6 +9,8 @@ import {
 } from './styles'
 
 export function Success() {
+  const { userAddress, paymentMethod } = useShoppingCart()
+  console.log('userAddress: ', userAddress)
   return (
     <SuccessContainer>
       <h1>Uhu! Pedido confirmado</h1>
@@ -19,9 +22,13 @@ export function Success() {
               <MapPin size={22} color="#fafafa" weight="fill" />
             </IconTimer>
             <span>
-              Entrega em <strong>Rua João Daniel Martinelli, 102.</strong>
+              Entrega em{' '}
+              <strong>
+                Rua {userAddress.street}, {userAddress.number}.
+              </strong>
               <br />
-              Farrapos - Porto Alegre, RS
+              {userAddress.neighborhood} - {userAddress.city},{' '}
+              {userAddress.state}. CEP: {userAddress.cep}
             </span>
           </div>
           <div>
@@ -39,7 +46,7 @@ export function Success() {
             </IconMoney>
             <span>
               Pagamento na entrega <br />
-              <strong>Cartão de Crédito</strong>
+              <strong>{paymentMethod}</strong>
             </span>
           </div>
         </InfoOrder>

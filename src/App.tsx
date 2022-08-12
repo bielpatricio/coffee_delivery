@@ -3,15 +3,15 @@ import { Router } from './Router'
 import { BrowserRouter } from 'react-router-dom'
 import { GlobalStyle } from './styles/global'
 import { defaultTheme } from './styles/themes/default'
-// import { CyclesContextProvider } from './contexts/CyclesContext'
+import { ShoppingCartContextProvider } from './hooks/useShoppingCart'
 
 export function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
-        {/* <CyclesContextProvider> */}
-        <Router />
-        {/* </CyclesContextProvider> */}
+        <ShoppingCartContextProvider>
+          <Router />
+        </ShoppingCartContextProvider>
       </BrowserRouter>
       <GlobalStyle />
     </ThemeProvider>

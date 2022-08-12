@@ -1,4 +1,6 @@
 import { MapPinLine } from 'phosphor-react'
+import { ChangeEvent, useState } from 'react'
+import { useShoppingCart } from '../../../../hooks/useShoppingCart'
 import {
   AddressField,
   MediumInput,
@@ -10,7 +12,38 @@ import {
   CityInput,
 } from './styles'
 
+interface Address {
+  cep: string
+  street: string
+  number: string
+  complement: string
+  city: string
+  state: string
+  neighborhood: string
+}
+
 export function AddressForm() {
+  // const [address, setAddress] = useState({
+  //   cep: '',
+  //   street: '',
+  //   number: '',
+  //   complement: '',
+  //   city: '',
+  //   state: '',
+  //   neighborhood: '',
+  // } as Address)
+
+  const { handleChangeAddress, userAddress } = useShoppingCart()
+
+  // function handleChangeAddress(e: ChangeEvent<HTMLInputElement>) {
+  //   console.log('handleChange', e.target.name)
+  //   setAddress((state) => {
+  //     return { ...state, [e.target.name]: e.target.value }
+  //   })
+  // }
+
+  // console.log('Address: ', address)
+
   return (
     <AddressField>
       <HeaderForms>
@@ -21,16 +54,51 @@ export function AddressForm() {
         </div>
       </HeaderForms>
       <FormContainer>
-        <MediumInput placeholder="CEP" />
-        <BigInput placeholder="Rua" />
+        <MediumInput
+          placeholder="CEP"
+          name="cep"
+          onChange={handleChangeAddress}
+          value={userAddress.cep}
+        />
+        <BigInput
+          placeholder="Rua"
+          name="street"
+          onChange={handleChangeAddress}
+          value={userAddress.street}
+        />
         <div>
-          <MediumInput placeholder="Número" />
-          <ComplementInput placeholder="Complemento" />
+          <MediumInput
+            placeholder="Número"
+            name="number"
+            onChange={handleChangeAddress}
+            value={userAddress.number}
+          />
+          <ComplementInput
+            placeholder="Complemento"
+            name="complement"
+            onChange={handleChangeAddress}
+            value={userAddress.complement}
+          />
         </div>
         <div>
-          <MediumInput placeholder="Bairro" />
-          <CityInput placeholder="Cidade" />
-          <ShortInput placeholder="UF" />
+          <MediumInput
+            placeholder="Bairro"
+            name="neighborhood"
+            onChange={handleChangeAddress}
+            value={userAddress.neighborhood}
+          />
+          <CityInput
+            placeholder="Cidade"
+            name="city"
+            onChange={handleChangeAddress}
+            value={userAddress.city}
+          />
+          <ShortInput
+            placeholder="UF"
+            name="state"
+            onChange={handleChangeAddress}
+            value={userAddress.state}
+          />
         </div>
       </FormContainer>
     </AddressField>

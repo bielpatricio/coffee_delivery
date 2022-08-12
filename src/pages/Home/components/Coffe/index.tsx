@@ -1,5 +1,6 @@
 import { ShoppingCartSimple } from 'phosphor-react'
 import { ChangeEvent, useState } from 'react'
+import { useShoppingCart } from '../../../../hooks/useShoppingCart'
 import {
   CoffeeDiv,
   Footer,
@@ -13,8 +14,27 @@ import {
   ButtonField,
 } from './styles'
 
-export function Coffee() {
+interface CoffeeProps {
+  id: string
+  name: string
+  amount: number
+  description: string
+  price: number
+  image: string
+  tags: string[]
+}
+
+export function Coffee({
+  id,
+  name,
+  amount,
+  description,
+  price,
+  image,
+  tags,
+}: CoffeeProps) {
   const [quantity, setQuantity] = useState(1)
+  const imageURL = `/src/assets/Type=${image}.svg`
 
   function handleQuantityChange(e: ChangeEvent<HTMLInputElement>) {
     setQuantity(parseInt(e.target.value))
@@ -25,30 +45,44 @@ export function Coffee() {
   }
 
   function SubQuantityProduct() {
-    setQuantity((state) => state - 1)
+    if (quantity > 1) {
+      setQuantity((state) => state - 1)
+    }
   }
+
+  const { addNewItem } = useShoppingCart()
+
+  function handleAddItemToCart() {
+    const newItem = {
+      id,
+      name,
+      amount: quantity,
+      description,
+      price,
+      image,
+      tags,
+    }
+    addNewItem(newItem)
+  }
+
   return (
     <CoffeeDiv>
-      <img src="/src/assets/Type=Americano.svg" alt="Coffee" />
+      <img src={imageURL} alt={image} draggable={false} />
       <TextDiv>
         <TypeDiv>
-          <div>
-            <strong>TRADICIONAL</strong>
-          </div>
-          <div>
-            <strong>GELATO</strong>
-          </div>
-          <div>
-            <strong>ALCOÓLICO</strong>
-          </div>
+          {tags.map((tag) => (
+            <div key={tag}>
+              <strong>{tag}</strong>
+            </div>
+          ))}
         </TypeDiv>
-        <h2>Expresso Americano</h2>
-        <span>Expresso diluído, menos intenso que o tradicional</span>
+        <h2>{name}</h2>
+        <span>{description}</span>
       </TextDiv>
       <Footer>
         <div>
           <span>R$</span>
-          <h2>9,90</h2>
+          <h2>{price}</h2>
         </div>
         <div>
           <ButtonField>
@@ -65,7 +99,7 @@ export function Coffee() {
               <ButtonIconMinus size={16} color="#8047F8" weight="bold" />
             </Button>
           </ButtonField>
-          <ShoppingCartDiv href="/Checkout" title="Carrinho">
+          <ShoppingCartDiv onClick={handleAddItemToCart} title="Carrinho">
             <ShoppingCartSimple size={24} color="#FAFAFA" weight="fill" />
           </ShoppingCartDiv>
         </div>

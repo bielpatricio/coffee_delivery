@@ -1,4 +1,5 @@
 import { Coffee } from './components/Coffe'
+import { MenuCoffee } from './components/Menu/Menu'
 import { Vantagem } from './components/Vantagens'
 import {
   CoffeeMarket,
@@ -19,16 +20,17 @@ export function Home() {
           </span>
           <Vantagem />
         </TextHome>
-        <img src="/src/assets/image_coffee_home.svg" alt="coffee" />
+        <img
+          src="/src/assets/image_coffee_home.svg"
+          alt="coffee"
+          draggable={false}
+        />
       </HeaderContainer>
       <h2>Nossos cafés</h2>
       <CoffeeMarket>
-        <Coffee />
-        <Coffee />
-        <Coffee />
-        <Coffee />
-        <Coffee />
-        <Coffee />
+        {MenuCoffee.map((menu) => {
+          return <Coffee key={menu.id} {...menu} />
+        }).reverse()}
       </CoffeeMarket>
     </HomeContainer>
   )
