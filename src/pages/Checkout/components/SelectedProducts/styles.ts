@@ -57,13 +57,19 @@ export const ConfirmOrder = styled.button`
   border: none;
   border-radius: 8px;
 
-  &:focus {
+  &:not(:disabled)&:focus {
     box-shadow: none;
     outline: transparent;
   }
 
-  &:hover {
+  &:not(:disabled)&:hover {
     cursor: pointer;
     background-color: ${(props) => props.theme['yellow-dark']};
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+    background-color: ${(props) => props.theme.yellow};
   }
 `
