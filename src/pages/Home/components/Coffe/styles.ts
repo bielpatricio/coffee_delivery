@@ -95,6 +95,7 @@ export const ShoppingCartDiv = styled.button`
   border: none;
   &:hover {
     background-color: ${(props) => props.theme.purple};
+    cursor: pointer;
   }
 `
 export const ButtonField = styled.div`

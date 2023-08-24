@@ -5,11 +5,11 @@ import { useAuth } from '../../hooks/useAuth'
 import { HeaderLogin } from '../../components/HeaderLogin'
 
 export function DefaultLayout() {
-  const { isLogged } = useAuth()
+  const { isAuthenticated } = useAuth()
 
   return (
     <LayoutContainer>
-      {isLogged ? <Header /> : <HeaderLogin />}
+      {isAuthenticated ? <Header /> : <HeaderLogin />}
       <Outlet />
     </LayoutContainer>
   )

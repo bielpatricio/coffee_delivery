@@ -1,15 +1,34 @@
-import { Navigate } from 'react-router-dom'
+import { Navigate, Route, RouteProps, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../hooks/useAuth'
-import { ReactNode } from 'react'
+import { ComponentType, ReactElement, ReactNode } from 'react'
 
-interface ProtectedProps {
-  children: ReactNode
+interface ProtectedProps extends RouteProps {
+  component: ComponentType<any>
 }
 
-export function Protected({ children }: ProtectedProps) {
-  const { isLogged } = useAuth()
+export function Protected({
+  component: Component,
+  ...rest
+}: ProtectedProps): ReactElement {
+  const { isAuthenticated } = useAuth()
+  const navigate = useNavigate()
 
-  if (!isLogged) return <Navigate to={{ pathname: '/login' }} />
+  if (!isAuthenticated) {
+    navigate('/login')
+    return <></>
+  }
 
-  return children
+  return <Route {...rest} element={<Component />} />
 }
+
+// interface ProtectedProps {
+//   children: ReactNode
+// }
+
+// export function Protected({ children }: ProtectedProps) {
+//   const { isAuthenticated } = useAuth()
+
+//   if (!isAuthenticated) return <Navigate to={{ pathname: '/login' }} />
+
+//   return children
+// }

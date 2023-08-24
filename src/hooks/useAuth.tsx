@@ -20,7 +20,8 @@ interface AuthContextType {
   user: User | null
   login: (user: User) => void
   logout: () => void
-  isLogged: boolean
+  isAuthenticated: boolean
+  isLoading: boolean
 }
 
 export const AuthContext = createContext({} as AuthContextType)
@@ -31,15 +32,19 @@ interface AuthProviderProps {
 
 export function AuthContextProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
 
-  const isLogged = useMemo(() => !!user, [user])
+  const isAuthenticated = useMemo(() => !!user, [user])
+  console.log('isAuthenticated', isAuthenticated, user)
 
   const getUser = useCallback(() => {
+    setIsLoading(true)
     const user = localStorage.getItem('user')
 
     if (user) {
       setUser(JSON.parse(user))
     }
+    setIsLoading(false)
   }, [])
 
   useEffect(() => {
@@ -57,8 +62,8 @@ export function AuthContextProvider({ children }: AuthProviderProps) {
   }, [])
 
   const authContextProviderValue = useMemo(
-    () => ({ user, login, logout, isLogged }),
-    [user, login, logout, isLogged],
+    () => ({ user, login, logout, isAuthenticated, isLoading }),
+    [user, login, logout, isAuthenticated, isLoading],
   )
 
   return (

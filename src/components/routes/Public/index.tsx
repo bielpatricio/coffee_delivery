@@ -1,15 +1,34 @@
-import { Navigate } from 'react-router-dom'
+import { Navigate, Route, RouteProps, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../hooks/useAuth'
-import { ReactNode } from 'react'
+import { ComponentType, ReactElement, ReactNode } from 'react'
 
-interface PublicProps {
-  children: ReactNode
+interface PublicProps extends RouteProps {
+  component: ComponentType<any>
 }
 
-export function Public({ children }: PublicProps) {
-  const { isLogged } = useAuth()
+export function Public({
+  component: Component,
+  ...rest
+}: PublicProps): ReactElement {
+  const { isAuthenticated } = useAuth()
+  const navigate = useNavigate()
 
-  if (isLogged) return <Navigate to={{ pathname: '/' }} />
+  if (!isAuthenticated) {
+    navigate('/login')
+    return <></>
+  }
 
-  return children
+  return <Route {...rest} element={<Component />} />
 }
+
+// interface PublicProps {
+//   children: ReactNode
+// }
+
+// export function Public({ children }: PublicProps) {
+//   const { isAuthenticated } = useAuth()
+
+//   if (isAuthenticated) return <Navigate to={{ pathname: '/' }} />
+
+//   return children
+// }
