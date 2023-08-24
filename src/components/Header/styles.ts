@@ -64,3 +64,18 @@ export const QuantityCart = styled.div`
 export const CartContainer = styled.div`
   display: flex;
 `
+
+export const Button = styled.button`
+  background: transparent;
+  border: 1px solid ${(props) => props.theme.red};
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  color: ${(props) => props.theme.red};
+  text-decoration: none;
+
+  &:hover {
+    background-color: ${(props) => props.theme.red};
+    color: ${(props) => props.theme.white};
+    cursor: pointer;
+  }
+`

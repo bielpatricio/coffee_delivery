@@ -4,6 +4,7 @@ import {
   ReactNode,
   useContext,
   useEffect,
+  useMemo,
   useReducer,
   useState,
 } from 'react'
@@ -151,22 +152,37 @@ export function ShoppingCartContextProvider({
     dispatch(subCoffeeAction(id))
   }
 
+  const ShoppingCartContextProviderValue = useMemo(
+    () => ({
+      items,
+      subItem,
+      addItem,
+      removeItem,
+      addNewItem,
+      total,
+      userAddress,
+      handleChangeAddress,
+      paymentMethod,
+      handleChangePaymentMethod,
+      resetAll,
+    }),
+    [
+      items,
+      subItem,
+      addItem,
+      removeItem,
+      addNewItem,
+      total,
+      userAddress,
+      handleChangeAddress,
+      paymentMethod,
+      handleChangePaymentMethod,
+      resetAll,
+    ],
+  )
+
   return (
-    <ShoppingCartContext.Provider
-      value={{
-        items,
-        subItem,
-        addItem,
-        removeItem,
-        addNewItem,
-        total,
-        userAddress,
-        handleChangeAddress,
-        paymentMethod,
-        handleChangePaymentMethod,
-        resetAll,
-      }}
-    >
+    <ShoppingCartContext.Provider value={ShoppingCartContextProviderValue}>
       {children}
     </ShoppingCartContext.Provider>
   )

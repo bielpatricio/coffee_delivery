@@ -3,13 +3,16 @@ import { useShoppingCart } from '../../hooks/useShoppingCart'
 import {
   CartContainer,
   HeaderContainer,
+  Button,
   LocationContainer,
   QuantityCart,
   ShoppingCartDiv,
 } from './styles'
+import { useAuth } from '../../hooks/useAuth'
 
 export function Header() {
   const { items } = useShoppingCart()
+  const { logout } = useAuth()
 
   return (
     <HeaderContainer>
@@ -31,6 +34,7 @@ export function Header() {
             </QuantityCart>
           )}
         </CartContainer>
+        <Button onClick={() => logout()}>{'Sair'}</Button>
       </div>
     </HeaderContainer>
   )

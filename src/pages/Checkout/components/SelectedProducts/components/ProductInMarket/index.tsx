@@ -51,7 +51,6 @@ export function ProductInMarket({
         return state - 1
       })
     } else {
-      console.log('y?????????')
       removeItem(id)
       setQuantity(0)
     }
