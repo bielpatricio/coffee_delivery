@@ -60,6 +60,24 @@ $ yarn dev
 
 <br>
 
+# Layout
+
+The application layout is available on Figma:
+
+<a href="https://www.figma.com/file/vmYojvguCSv0vkX1GmcWqf/GitHub-Blog-(Community)?node-id=0%3A1">
+  <img alt="Made by rocketseat" src="https://img.shields.io/badge/Acessar%20Layout%20-Figma-%2304D361">
+</a>
+
+![image](https://github.com/bielpatricio/coffee_delivery/assets/32223762/a8db5e0a-3379-4d43-81aa-8a9b8cb9ac82)
+
+![image](https://github.com/bielpatricio/coffee_delivery/assets/32223762/a337df99-8140-4476-9289-91ec2ddb4a1e)
+
+![image](https://github.com/bielpatricio/coffee_delivery/assets/32223762/3a2fddd3-5d05-45eb-824a-276b5d19d379)
+
+![image](https://github.com/bielpatricio/coffee_delivery/assets/32223762/31a2b904-5263-4261-a15c-5ea085fbff90)
+
+![image](https://github.com/bielpatricio/coffee_delivery/assets/32223762/932d0b7b-cc80-4e1e-9fd0-c0a3a1fbe2a8)
+
 # Contact
 
 Gabriel Patrício - gabrieltp087@gmail.com - [https://github.com/bielpatricio/](https://github.com/bielpatricio)
