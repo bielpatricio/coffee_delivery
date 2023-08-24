@@ -74,6 +74,8 @@ The application layout is available on Figma:
 
 ![image](https://github.com/bielpatricio/coffee_delivery/assets/32223762/3a2fddd3-5d05-45eb-824a-276b5d19d379)
 
+![image](https://github.com/bielpatricio/coffee_delivery/assets/32223762/248a82f1-4fc4-4182-93dc-13960c2b842b)
+
 ![image](https://github.com/bielpatricio/coffee_delivery/assets/32223762/31a2b904-5263-4261-a15c-5ea085fbff90)
 
 ![image](https://github.com/bielpatricio/coffee_delivery/assets/32223762/932d0b7b-cc80-4e1e-9fd0-c0a3a1fbe2a8)
